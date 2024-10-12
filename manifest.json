@@ -1,0 +1,20 @@
+{
+    "manifest_version": 3,
+    "name": "Responsible Poker Extension",
+    "version": "1.0",
+    "description": "Play poker responsibely",
+    "action": {
+      "default_popup": "popup.html",
+      "default_icon": {
+        "16": "poker16.png",
+        "48": "poker48.png",
+        "128": "poker128.png"
+      }
+    },
+    "permissions": [],
+    "icons": {
+      "16": "poker16.png",
+      "48": "poker48.png",
+      "128": "poker128.png"
+    }
+}
