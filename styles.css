@@ -3,6 +3,7 @@ body {
     font-family: Arial, sans-serif;
     height: 100px;
     width: 300px;
+    padding: 10px;
 }
 
 h1 {
@@ -10,29 +11,24 @@ h1 {
     color: #4CAF50;
 }
 
-h2 {
-    font-size: 20px;
-}
-
-h3 {
-    font-size: 16px;
-}
-
-p, ul {
+p {
     font-size: 14px;
 }
 
-.TiltPercentageLow {
-    width: 100%;
-    background-color: green;
-    height: 20pt;
-    border: 4px inset darkgreen;
-    border-radius: 20px;
-    /** Border box to get the 4px+4px of border to be included in the 100% width */
-    box-sizing: border-box;
-  }
-  
-  .TiltPercentageHigh {
-    background-color: red;
-    border: 4px inset darkred;
-  }
+.tilt-container {
+    width: 90%;  /* Reduce container width slightly */
+    background-color: #f0f0f0;
+    height: 20px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 0 auto; /* Center container */
+}
+
+.tilt-bar {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(to right, darkgreen 40%, green 60%, red 100%); /* Adjust the gradient to show more green */
+    border-radius: 10px;
+    transition: width 1s ease, background 1s ease;
+}
