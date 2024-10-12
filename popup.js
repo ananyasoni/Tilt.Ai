@@ -10,11 +10,19 @@
         tiltBar.style.width = tiltPercentage + '%';
 
         // Adjust the gradient based on the tilt percentage
-        const greenShade = Math.max(0, 255 - (tiltPercentage * 2.55)); // Darker green as tilt increases
-        const redShade = Math.min(255, tiltPercentage * 2.55); // Increasing red as tilt increases
+        let gradient;
+        if (tiltPercentage <= 75) {
+            // Smooth gradient transition for green
+            const greenShade = Math.max(0, 255 - (tiltPercentage * 3.4)); // Adjust green shade for smooth transition
+            gradient = `linear-gradient(to right, rgb(0, ${greenShade}, 0), rgb(0, 255, 0))`;
+        } else {
+            // Stronger and brighter red transition after 75%
+            const redShade = Math.min(255, (tiltPercentage - 75) * 10); // Increase red shade intensity significantly
+            gradient = `linear-gradient(to right, rgb(0, 255, 0), rgb(${redShade}, 0, 0))`;
+        }
 
-        // Update the gradient with dynamic green and red values
-        tiltBar.style.background = `linear-gradient(to right, rgb(0, ${greenShade}, 0), rgb(${redShade}, 0, 0))`;
+        // Update the gradient background
+        tiltBar.style.background = gradient;
     }
 
     // Simulate the tilt bar gradually increasing from 0 to 1
@@ -32,9 +40,9 @@
     const interval = setInterval(() => {
         if (tilt <= 1) {
             updateTiltDisplay(tilt);
-            tilt += 0.02; // Increase the tilt more slowly
+            tilt += 0.025; // Increase the tilt gradually (slower animation)
         } else {
             clearInterval(interval); // Stop when the tilt reaches 1
         }
-    }, 300); // Change tilt value every 300ms (3 seconds for 0.2 increments)
+    }, 100); // Change tilt value every 100ms
 })();

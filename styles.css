@@ -1,34 +1,108 @@
-/* styles.css */
+/* Background styling */
 body {
-    font-family: Arial, sans-serif;
-    height: 100px;
-    width: 300px;
-    padding: 10px;
+    font-family: 'Verdana', sans-serif;
+    background-color: #4caf50; /* Light green background */
+    color: #fff; /* White text for contrast */
+    text-align: center;
+    padding: 20px;
+    background-image: url('poker-chips.png'), url('playing-cards.png'); /* Poker-themed images */
+    background-position: left bottom, right top;
+    background-repeat: no-repeat;
+    background-size: 150px, 150px;
 }
 
-h1 {
-    font-size: 24px;
-    color: #4CAF50;
-}
-
-p {
-    font-size: 14px;
-}
-
+/* Tilt Bar Section */
 .tilt-container {
-    width: 90%;  /* Reduce container width slightly */
-    background-color: #f0f0f0;
-    height: 20px;
-    border: 2px solid #ccc;
+    position: relative;
+    width: 300px; /* Width of the tilt bar container */
+    margin: 0 auto;
+    border: 3px solid #ffcc00; /* Gold border */
+    padding: 10px;
     border-radius: 10px;
-    overflow: hidden;
-    margin: 0 auto; /* Center container */
+    background-color: #388e3c; /* Dark green background */
 }
 
-.tilt-bar {
-    height: 100%;
-    width: 0;
-    background: linear-gradient(to right, darkgreen 40%, green 60%, red 100%); /* Adjust the gradient to show more green */
-    border-radius: 10px;
-    transition: width 1s ease, background 1s ease;
+/* Title */
+h1 {
+    font-size: 36px;
+    color: #ffcc00; /* Gold text */
+    margin-bottom: 20px;
+    font-family: 'Georgia', serif; /* Elegant serif for casino style */
+    text-shadow: 2px 2px #000; /* Shadow effect */
 }
+
+/* Paragraphs */
+p {
+    font-size: 18px;
+    color: #fff;
+}
+
+/* Tilt Bar */
+#tilt-bar {
+    width: 100%;
+    height: 25px; /* Height of the bar */
+    border-radius: 12px;
+    background: linear-gradient(to right, rgb(0, 255, 0), rgb(0, 255, 0)); /* Start with green */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+    transition: width 0.5s ease, background 0.5s ease; /* Smooth transition */
+    position: relative; /* Position for absolute children */
+}
+
+
+.markers {
+    position: relative;
+    margin-top: 10px; /* Space above markers */
+}
+
+.marker {
+    position: absolute;
+    top: -20px; /* Position above the bar, adjust for desired spacing */
+    font-size: 14px; /* Font size of the markers */
+    color: #ffcc00; /* Color for the markers */
+    text-shadow: 1px 1px #000; /* Shadow for better visibility */
+    transform: translateX(-50%); /* Center the marker text */
+}
+
+/* Marker line for visibility */
+.marker::after {
+    content: '';
+    position: absolute;
+    bottom: -5px; /* Position of the line */
+    left: 50%; /* Center the line */
+    width: 2px; /* Width of the line */
+    height: 10px; /* Height of the line */
+    background-color: #ffcc00; /* Color of the marker line */
+    transform: translateX(-50%); /* Center the line */
+}
+
+/* Poker chip-inspired buttons */
+button {
+    background-color: #d32f2f; /* Color of the poker chip */
+    color: #fff;
+    border: none;
+    border-radius: 50%; /* Circular buttons */
+    width: 60px; /* Width of the button */
+    height: 60px; /* Height of the button */
+    font-size: 16px; /* Font size */
+    font-weight: bold;
+    box-shadow: 0 4px #000; /* Shadow effect */
+    cursor: pointer;
+    margin: 20px; /* Margin around buttons */
+}
+
+button:active {
+    box-shadow: none; /* No shadow when active */
+    transform: translateY(2px); /* Press effect */
+}
+
+button:hover {
+    background-color: #b71c1c; /* Darker red on hover */
+}
+
+/* Background behind the bar */
+.tilt-container {
+    background-color: black; /* Black background for contrast */
+    padding: 10px; /* Padding for the container */
+    border-radius: 10px; /* Rounded corners for the container */
+}
+
