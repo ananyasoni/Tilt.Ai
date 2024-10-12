@@ -44,5 +44,5 @@
         } else {
             clearInterval(interval); // Stop when the tilt reaches 1
         }
-    }, 100); // Change tilt value every 100ms
+    }, 1000); // Change tilt value every 100ms
 })();

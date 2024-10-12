@@ -1,46 +1,49 @@
 /* Background styling */
+.bebas-neue-regular {
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
 body {
-    font-family: 'Verdana', sans-serif; /* More casino-like font */
-    background-color: #2e7d32; /* Dark green poker table background */
+    font-family: 'Arial', sans-serif; /* Clean and modern font */
+    background-color: #171717; /* Dark gray for a sleek look */
     color: #fff; /* White text for contrast */
     text-align: center;
-    padding: 20px;
+    padding: 10px; /* Increased padding for a more spacious layout */
 }
 
-/* Tilt Bar Section */
 .tilt-container {
-    width: 300px;
+    width: 300px; /* Adjusted width for a smaller rectangle */
+    height: 10px; /* Set a height for the popup */
     margin: 0 auto;
-    border: 3px solid #ffcc00; /* Gold border */
-    padding: 10px;
-    border-radius: 10px;
-    background-color: #1b5e20; /* Dark green background for contrast */
+    border-radius: 15px; /* More rounded corners */
     position: relative; /* Position relative for absolute positioning of markers */
 }
 
 /* Title */
 h1 {
-    font-size: 32px;
+    font-size: 34px; /* Adjusted font size for the title */
     color: #ffcc00; /* Gold text */
-    margin-bottom: 20px;
-    font-family: 'Georgia', serif; /* Elegant serif for casino style */
+    margin-bottom: 10px; /* Reduced margin for a tighter look */
+    font-family: 'Bebas Neue', serif; /* Elegant serif for casino style */
     text-shadow: 2px 2px #000; /* Slight shadow for a polished look */
 }
 
 /* Paragraphs */
 p {
-    font-size: 18px;
-    color: #fff;
+    font-size: 16px; /* Adjusted font size for better readability */
+    color: #e0e0e0; /* Light gray for better contrast */
 }
 
 /* Tilt Bar */
 #tilt-bar {
     width: 100%;
-    height: 25px;
+    height: 10px; /* Height for visibility */
     border-radius: 12px;
-    background: linear-gradient(to right, rgb(0, 255, 0), rgb(255, 0, 0)); /* Default green to red */
+    background: linear-gradient(to right, rgb(0, 255, 0), rgb(255, 165, 0), rgb(255, 0, 0)); /* Smooth gradient from green to orange to red */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* A slight shadow for depth */
-    transition: width 0.3s ease, background 0.3s ease; /* Smooth transition on width and color changes */
+    transition: width 0.5s ease, background 0.5s ease; /* Smooth transition on width and color changes */
     position: relative; /* Position relative for markers */
 }
 
@@ -48,15 +51,16 @@ p {
 .markers {
     position: absolute; /* Position markers relative to the tilt bar */
     width: 100%; /* Make markers container full width */
-    top: -25px; /* Adjust to move markers above the bar */
+    top: -30px; /* Adjust to move markers above the bar */
 }
 
 /* Individual marker styles */
 .marker {
     position: absolute; /* Absolute position for markers */
-    color: white; /* Color of the marker text */
-    font-size: 12px; /* Font size for the marker text */
+    color: #fff; /* Color of the marker text */
+    font-size: 14px; /* Font size for better readability */
     transform: translateX(-50%); /* Center the marker text above its position */
+    margin-top: -5px; /* Space between marker text and line */
 }
 
 /* Vertical marker lines */
@@ -64,8 +68,8 @@ p {
     position: absolute; /* Position vertically */
     width: 2px; /* Width of the vertical line */
     height: 25px; /* Height of the vertical line */
-    background-color: #fff; /* Color of the vertical line */
-    top: 35px; /* Position so that it appears on the bar */
+    background-color: #ffcc00; /* Gold color for vertical lines */
+    top: 30px; /* Position so that it appears on the bar */
 }
 
 /* Poker chip-inspired buttons */
@@ -74,17 +78,18 @@ button {
     color: #fff;
     border: none;
     border-radius: 50%; /* Circular buttons like poker chips */
-    width: 50px;
-    height: 50px;
-    font-size: 16px;
+    width: 50px; /* Adjusted width for buttons */
+    height: 50px; /* Adjusted height for buttons */
+    font-size: 16px; /* Font size for button text */
     font-weight: bold;
-    box-shadow: 0 4px #000; /* Slight shadow to give a raised look */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Slight shadow to give a raised look */
     cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s; /* Smooth transitions for hover and press effects */
 }
 
 button:active {
     box-shadow: none;
-    transform: translateY(2px); /* Press effect */
+    transform: translateY(3px); /* Press effect */
 }
 
 button:hover {
