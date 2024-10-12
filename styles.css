@@ -1,7 +1,7 @@
 /* styles.css */
 body {
     font-family: Arial, sans-serif;
-    height: 60px;
+    height: 100px;
     width: 300px;
 }
 
@@ -21,3 +21,18 @@ h3 {
 p, ul {
     font-size: 14px;
 }
+
+.TiltPercentageLow {
+    width: 100%;
+    background-color: green;
+    height: 20pt;
+    border: 4px inset darkgreen;
+    border-radius: 20px;
+    /** Border box to get the 4px+4px of border to be included in the 100% width */
+    box-sizing: border-box;
+  }
+  
+  .TiltPercentageHigh {
+    background-color: red;
+    border: 4px inset darkred;
+  }

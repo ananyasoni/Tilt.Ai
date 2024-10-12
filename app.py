@@ -10,9 +10,9 @@ with open('ml_model.pkl', 'rb') as f:
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    data = request.get_json()  # Receive data from the Chrome extension
+    data = request.get_json()
     features = np.array(data['features']).reshape(1, -1)
-    prediction = model.predict(features)  # Use your ML model for predictions
+    prediction = model.predict(features)
     return jsonify({'prediction': prediction.tolist()})
 
 if __name__ == '__main__':
