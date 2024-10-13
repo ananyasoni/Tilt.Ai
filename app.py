@@ -29,12 +29,13 @@ def addAccount():
 @app.route('/changeblock', methods=['POST'])
 def changeBlock():
     data = request.get_json()
-    login = data.username
-    block = data.block
+    login = data['username']
+    block = data['block']
     conn = connect_db('User_Info.db')
     cursor = conn.cursor()
     cursor.execute("UPDATE Users SET block = ? WHERE user = ?;", (block, login))
     conn.commit()
+    return jsonify({'success' : block})
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -61,4 +62,4 @@ def getBlock():
     return jsonify({'block' : cursor.fetchone()[0]})
 
 if __name__ == '__main__':
-    app.run(port=5500)
+    app.run(port=5000)

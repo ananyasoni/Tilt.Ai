@@ -1,8 +1,10 @@
 'use strict';
 
 (function() {
+  const blockerButton = id('blocker_btn');
 
-  window.addEventListener('blocker_btn', init);
+  blockerButton.addEventListener('click', updateBlock);
+  init();
 
   function init() {
       loadAccount();
@@ -13,9 +15,35 @@
     console.log(err);
    }
 
+   async function updateBlock() {
+    try {
+      let bool = id('blocker_val').checked;
+      let login = sessionStorage.getItem('username');
+      let blockNum = 0;
+      if(bool) {
+        blockNum = 1;
+      }
+      let params = {
+        username: login,
+        block: blockNum
+      };
+      let res = await fetch('http://127.0.0.1:5000/changeblock', {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'  // Set the content type to JSON
+        },
+        body: JSON.stringify(params)
+      });
+      await statusCheck(res);
+      init();
+    } catch (err) {
+      handleError(err);
+    }
+   }
+
    async function getCheckBox() {
       try {
-          let login = localStorage.getItem('username');
+          let login = sessionStorage.getItem('username');
           let params = {
               username: login
           };

@@ -33,12 +33,15 @@
       let params = Object.fromEntries(formData.entries());
       let res = await fetch('http://127.0.0.1:5000/login', {  // Replace with actual backend URL
         method: "POST",
+        headers: {
+          'Content-Type': 'application/json'  // Set the content type to JSON
+        },
         body: JSON.stringify(params)
       });
       await statusCheck(res);
       res = await res.json();
       // Store the username in local storage
-      localStorage.setItem('username', res.username);
+      sessionStorage.setItem('username', res.success);
       signIn(res);
     } catch (err) {
       handleError(err);
@@ -52,12 +55,15 @@
       let params = Object.fromEntries(formData.entries());
       let res = await fetch('http://127.0.0.1:5000/signup', {  // Replace with actual backend URL
         method: "POST",
+        headers: {
+          'Content-Type': 'application/json'  // Set the content type to JSON
+        },
         body: JSON.stringify(params)
       });
       await statusCheck(res);
       res = await res.json();
       // Store the username in local storage
-      localStorage.setItem('username', res.username);
+      sessionStorage.setItem('username', res.success);
       login(res);
     } catch (err) {
         handleError(err);
