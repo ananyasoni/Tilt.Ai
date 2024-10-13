@@ -40,7 +40,7 @@ def changeBlock():
     block = data.block
     conn = connect_db('User_Info.db')
     cursor = conn.cursor()
-    cursor.execute("UPDATE Users SET block = ? WHERE username = ?" (block, login))
+    cursor.execute("UPDATE Users SET block = ? WHERE username = ?", (block, login))
 
 @app.route('/login', methods=['POST'])
 def login():
