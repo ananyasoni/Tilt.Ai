@@ -13,6 +13,7 @@ def predict():
     data = request.get_json()
     features = np.array(data['features']).reshape(1, -1)
     prediction = model.predict(features)
+    
     return jsonify({'prediction': prediction.tolist()})
 
 if __name__ == '__main__':
