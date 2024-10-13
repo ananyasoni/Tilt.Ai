@@ -6,15 +6,15 @@
     "action": {
       "default_popup": "popup.html",
       "default_icon": {
-        "16": "poker16.png",
-        "48": "poker48.png",
-        "128": "poker128.png"
+        "16": "spade16.jpg",
+        "48": "husky48.png",
+        "128": "husky128.png"
       }
     },
     "permissions": [],
     "icons": {
-      "16": "poker16.png",
-      "48": "poker48.png",
-      "128": "poker128.png"
+      "16": "spade16.jpg",
+      "48": "husky48.png",
+      "128": "husky128.png"
     }
 }

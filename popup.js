@@ -37,12 +37,13 @@
     })
     .catch(error => console.error('Error:', error));
 
-    const interval = setInterval(() => {
-        if (tilt <= 1) {
-            updateTiltDisplay(tilt);
-            tilt += 0.025; // Increase the tilt gradually (slower animation)
-        } else {
-            clearInterval(interval); // Stop when the tilt reaches 1
-        }
-    }, 1000); // Change tilt value every 100ms
+    updateTiltDisplay(0.78);
+    // const interval = setInterval(() => {
+    //     if (tilt <= 1) {
+    //         updateTiltDisplay(tilt);
+    //         tilt += 0.025; // Increase the tilt gradually (slower animation)
+    //     } else {
+    //         clearInterval(interval); // Stop when the tilt reaches 1
+    //     }
+    // }, 1000); // Change tilt value every 100ms
 })();
