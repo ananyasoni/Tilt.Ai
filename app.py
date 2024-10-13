@@ -25,10 +25,45 @@ def addAccount():
     data = request.get_json()
     login = data.username
     password = data.password
-    print(login, password)
     conn = connect_db('User_Info.db')
     cursor = conn.cursor()
-    cursor.execute("INSERT users (name, email) VALUES ('John Doe', 'john@example.com')")
+    try:
+        cursor.execute("INSERT INTO Users (username, password, block) VALUES (?, ?, ?)", (login, password, 0))
+    except sqlite3.IntegrityError as e:
+        return jsonify({'success' : False})
+    return jsonify({'success' : True})
+
+@app.route('/changeblock', methods=['POST'])
+def changeBlock():
+    data = request.get_json()
+    login = data.username
+    block = data.block
+    conn = connect_db('User_Info.db')
+    cursor = conn.cursor()
+    cursor.execute("UPDATE Users SET block = ? WHERE username = ?" (block, login))
+
+@app.route('/login', methods=['POST'])
+def login():
+    data = request.get_json()
+    login = data.username
+    password = data.password
+    conn = connect_db('User_Info.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT EXISTS(SELECT * FROM Users WHERE username = ? AND password = ?)", (login, password))
+    if(cursor.fetchone()[0]):
+        return jsonify({'success' : True})
+    else:
+        return jsonify({'success' : False})
+    
+@app.route('/getblock', methods=['GET'])
+def getBlock():
+    data = request.get_json()
+    login = data.username
+    password = data.password
+    conn = connect_db('User_Info.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT block FROM Users WHERE username = ? AND password = ?", (login, password))
+    return jsonify({'block' : cursor.fetchone()[0]})
 
 if __name__ == '__main__':
     app.run(debug=True)
