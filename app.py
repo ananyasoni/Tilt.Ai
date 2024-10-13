@@ -6,9 +6,9 @@ import pickle
 
 app = Flask(__name__)
 
-# Load your pre-trained machine learning model
-with open('ml_model.pkl', 'rb') as f:
-    model = pickle.load(f)
+# # Load your pre-trained machine learning model
+# with open('ml_model.pkl', 'rb') as f:
+#     model = pickle.load(f)
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -20,11 +20,11 @@ def predict():
 def connect_db(db_name):
     return sqlite3.connect(db_name)
 
-@app.route('/addaccount', methods=['POST'])
+@app.route('/signup', methods=['POST'])
 def addAccount():
     data = request.get_json()
-    login = data.username
-    password = data.password
+    login = data['username']  # Corrected how data is accessed
+    password = data['password']
     conn = connect_db('User_Info.db')
     cursor = conn.cursor()
     try:
@@ -47,6 +47,7 @@ def login():
     data = request.get_json()
     login = data.username
     password = data.password
+    
     conn = connect_db('User_Info.db')
     cursor = conn.cursor()
     cursor.execute("SELECT EXISTS(SELECT * FROM Users WHERE username = ? AND password = ?)", (login, password))
