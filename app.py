@@ -27,7 +27,7 @@ def addAccount():
         return jsonify({'success' : False})
     return jsonify({'success' : login})
 
-@app.route('getpercentage', methods=['GET'])
+@app.route('/getpercentage', methods=['GET'])
 def getPercentage():
     return jsonify({'percentage' : grab()})
 
