@@ -4,6 +4,7 @@ import numpy as np
 import sqlite3
 import json
 import pickle
+from pokernowgrabber import grab
 
 app = Flask(__name__)
 CORS(app)  # Apply CORS to the app
@@ -25,6 +26,10 @@ def addAccount():
     except sqlite3.IntegrityError as e:
         return jsonify({'success' : False})
     return jsonify({'success' : login})
+
+@app.route('getpercentage', methods=['GET'])
+def getPercentage():
+    return jsonify({'percentage' : grab()})
 
 @app.route('/changeblock', methods=['POST'])
 def changeBlock():

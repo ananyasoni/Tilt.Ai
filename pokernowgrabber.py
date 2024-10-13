@@ -138,17 +138,17 @@ def hero_stack(hero):
     return int(size)
 
 
-is_turn = False
-button = -2
-stack = -1
-gains = 0
-hand_number = 0
-frame_num = 0
-hands_list = dict()
-duration_list = dict()
-starting_stack_list = dict()
-ending_stack_list = dict()
-losses = 0
+# is_turn = False
+# button = -2
+# stack = -1
+# gains = 0
+# hand_number = 0
+# frame_num = 0
+# hands_list = dict()
+# duration_list = dict()
+# starting_stack_list = dict()
+# ending_stack_list = dict()
+# losses = 0
 
 w_bar = np.array([2.44379855, -0.5349097, -2.70141675, 3.65846086, 3.52904844])
 b = -5.050082187754065
@@ -157,119 +157,134 @@ b = -5.050082187754065
 # video = cv2.VideoCapture('./pokersesh1.mov')
 
 begin = time.time()
-with mss.mss() as sct:
-    monitor = sct.monitors[0]
-    time.sleep(5)
 
-    while time.time() - begin < 420:
+def grab():
 
-        # while True:
-        #
-        #     while is_turn:
-        #         screen = sct.grab(monitor)
-        #         frame = np.array(screen)
-        #         # ret, frame = video.read()
-        #         frame = cv2.cvtColor(frame, cv2.COLOR_BGRA2BGR)
-        #         # if not ret:
-        #         #     print("There was a problem with this frame .... EXITING")
-        #         #     break
-        #         dim = (width, height)
-        #
-        #         # Apply resizing
-        #         frame = cv2.resize(frame, dim, interpolation=cv2.INTER_AREA)
-        #         hero_tab = frame[int(frame.shape[0] * (530 / 735)): int(frame.shape[0] * (620 / 735)),
-        #                    int(frame.shape[1] * (585 / 1145)): int(frame.shape[1] * (815 / 1145))]
-        frame_num += 1
-        screen = sct.grab(monitor)
-        frame = np.array(screen)
-        frame = cv2.cvtColor(frame, cv2.COLOR_BGRA2BGR)
-        dim = (width, height)
-        frame = cv2.resize(frame, dim, interpolation=cv2.INTER_AREA)
-        hero_tab = frame[int(frame.shape[0] * (530 / 735)): int(frame.shape[0] * (620 / 735)),
-                   int(frame.shape[1] * (585 / 1145)): int(frame.shape[1] * (815 / 1145))]
-        if frame_num == 3:
-            button = find_dealer(frame)
-            stack = hero_stack(hero_tab)
-        elif frame_num > 3:
-            curr_button = find_dealer(frame)
-            while button == curr_button:
-                # It is the same hand
-                if is_turn:
-                    start_time = time.time()
-                    screen = sct.grab(monitor)
-                    frame = np.array(screen)
-                    frame = cv2.cvtColor(frame, cv2.COLOR_BGRA2BGR)
-                    dim = (width, height)
-                    frame = cv2.resize(frame, dim, interpolation=cv2.INTER_AREA)
-                    hero_tab = frame[int(frame.shape[0] * (530 / 735)): int(frame.shape[0] * (620 / 735)),
-                               int(frame.shape[1] * (585 / 1145)): int(frame.shape[1] * (815 / 1145))]
-                    stack_at_start_of_turn = hero_stack(hero_tab)
-                    starting_stack_list[hand_number] = stack_at_start_of_turn
-                    while is_turn:
+    is_turn = False
+    button = -2
+    stack = -1
+    gains = 0
+    hand_number = 0
+    frame_num = 0
+    hands_list = dict()
+    duration_list = dict()
+    starting_stack_list = dict()
+    ending_stack_list = dict()
+    losses = 0
+
+    with mss.mss() as sct:
+        monitor = sct.monitors[0]
+        time.sleep(5)
+
+        while time.time() - begin < 300:
+
+            # while True:
+            #
+            #     while is_turn:
+            #         screen = sct.grab(monitor)
+            #         frame = np.array(screen)
+            #         # ret, frame = video.read()
+            #         frame = cv2.cvtColor(frame, cv2.COLOR_BGRA2BGR)
+            #         # if not ret:
+            #         #     print("There was a problem with this frame .... EXITING")
+            #         #     break
+            #         dim = (width, height)
+            #
+            #         # Apply resizing
+            #         frame = cv2.resize(frame, dim, interpolation=cv2.INTER_AREA)
+            #         hero_tab = frame[int(frame.shape[0] * (530 / 735)): int(frame.shape[0] * (620 / 735)),
+            #                    int(frame.shape[1] * (585 / 1145)): int(frame.shape[1] * (815 / 1145))]
+            frame_num += 1
+            screen = sct.grab(monitor)
+            frame = np.array(screen)
+            frame = cv2.cvtColor(frame, cv2.COLOR_BGRA2BGR)
+            dim = (width, height)
+            frame = cv2.resize(frame, dim, interpolation=cv2.INTER_AREA)
+            hero_tab = frame[int(frame.shape[0] * (530 / 735)): int(frame.shape[0] * (620 / 735)),
+                    int(frame.shape[1] * (585 / 1145)): int(frame.shape[1] * (815 / 1145))]
+            if frame_num == 3:
+                button = find_dealer(frame)
+                stack = hero_stack(hero_tab)
+            elif frame_num > 3:
+                curr_button = find_dealer(frame)
+                while button == curr_button:
+                    # It is the same hand
+                    if is_turn:
+                        start_time = time.time()
                         screen = sct.grab(monitor)
                         frame = np.array(screen)
                         frame = cv2.cvtColor(frame, cv2.COLOR_BGRA2BGR)
                         dim = (width, height)
                         frame = cv2.resize(frame, dim, interpolation=cv2.INTER_AREA)
                         hero_tab = frame[int(frame.shape[0] * (530 / 735)): int(frame.shape[0] * (620 / 735)),
-                                   int(frame.shape[1] * (585 / 1145)): int(frame.shape[1] * (815 / 1145))]
-                        is_turn = is_hero_turn(hero_tab)
-                    end_time = time.time()
-                    screen = sct.grab(monitor)
-                    frame = np.array(screen)
-                    frame = cv2.cvtColor(frame, cv2.COLOR_BGRA2BGR)
-                    dim = (width, height)
-                    frame = cv2.resize(frame, dim, interpolation=cv2.INTER_AREA)
-                    hero_tab = frame[int(frame.shape[0] * (530 / 735)): int(frame.shape[0] * (620 / 735)),
-                               int(frame.shape[1] * (585 / 1145)): int(frame.shape[1] * (815 / 1145))]
-                    stack_at_end_of_turn = hero_stack(hero_tab)
-                    ending_stack_list[hand_number] = stack_at_end_of_turn
-                    did_i_win = ending_stack_list[hand_number] - starting_stack_list[hand_number]
-                    if did_i_win < 0:
-                        losses += 1
+                                int(frame.shape[1] * (585 / 1145)): int(frame.shape[1] * (815 / 1145))]
+                        stack_at_start_of_turn = hero_stack(hero_tab)
+                        starting_stack_list[hand_number] = stack_at_start_of_turn
+                        while is_turn:
+                            screen = sct.grab(monitor)
+                            frame = np.array(screen)
+                            frame = cv2.cvtColor(frame, cv2.COLOR_BGRA2BGR)
+                            dim = (width, height)
+                            frame = cv2.resize(frame, dim, interpolation=cv2.INTER_AREA)
+                            hero_tab = frame[int(frame.shape[0] * (530 / 735)): int(frame.shape[0] * (620 / 735)),
+                                    int(frame.shape[1] * (585 / 1145)): int(frame.shape[1] * (815 / 1145))]
+                            is_turn = is_hero_turn(hero_tab)
+                        end_time = time.time()
+                        screen = sct.grab(monitor)
+                        frame = np.array(screen)
+                        frame = cv2.cvtColor(frame, cv2.COLOR_BGRA2BGR)
+                        dim = (width, height)
+                        frame = cv2.resize(frame, dim, interpolation=cv2.INTER_AREA)
+                        hero_tab = frame[int(frame.shape[0] * (530 / 735)): int(frame.shape[0] * (620 / 735)),
+                                int(frame.shape[1] * (585 / 1145)): int(frame.shape[1] * (815 / 1145))]
+                        stack_at_end_of_turn = hero_stack(hero_tab)
+                        ending_stack_list[hand_number] = stack_at_end_of_turn
+                        did_i_win = ending_stack_list[hand_number] - starting_stack_list[hand_number]
+                        if did_i_win < 0:
+                            losses += 1
+                        else:
+                            losses = 0
+                        # print(stack_at_start_of_turn - stack_at_end_of_turn)
+                        if hand_number not in hands_list:
+                            hands_list[hand_number] = list()
+                        hands_list[hand_number].append(stack_at_end_of_turn - stack_at_start_of_turn)
+                        if hand_number not in duration_list:
+                            duration_list[hand_number] = list()
+                        duration_list[hand_number].append(end_time - start_time)
                     else:
-                        losses = 0
-                    # print(stack_at_start_of_turn - stack_at_end_of_turn)
-                    if hand_number not in hands_list:
-                        hands_list[hand_number] = list()
-                    hands_list[hand_number].append(stack_at_end_of_turn - stack_at_start_of_turn)
-                    if hand_number not in duration_list:
-                        duration_list[hand_number] = list()
-                    duration_list[hand_number].append(end_time - start_time)
-                else:
+                        screen = sct.grab(monitor)
+                        frame = np.array(screen)
+                        frame = cv2.cvtColor(frame, cv2.COLOR_BGRA2BGR)
+                        dim = (width, height)
+                        frame = cv2.resize(frame, dim, interpolation=cv2.INTER_AREA)
+                        hero_tab = frame[int(frame.shape[0] * (530 / 735)): int(frame.shape[0] * (620 / 735)),
+                                int(frame.shape[1] * (585 / 1145)): int(frame.shape[1] * (815 / 1145))]
+                        is_turn = is_hero_turn(hero_tab)
                     screen = sct.grab(monitor)
                     frame = np.array(screen)
                     frame = cv2.cvtColor(frame, cv2.COLOR_BGRA2BGR)
                     dim = (width, height)
                     frame = cv2.resize(frame, dim, interpolation=cv2.INTER_AREA)
-                    hero_tab = frame[int(frame.shape[0] * (530 / 735)): int(frame.shape[0] * (620 / 735)),
-                               int(frame.shape[1] * (585 / 1145)): int(frame.shape[1] * (815 / 1145))]
-                    is_turn = is_hero_turn(hero_tab)
-                screen = sct.grab(monitor)
-                frame = np.array(screen)
-                frame = cv2.cvtColor(frame, cv2.COLOR_BGRA2BGR)
-                dim = (width, height)
-                frame = cv2.resize(frame, dim, interpolation=cv2.INTER_AREA)
-                curr_button = find_dealer(frame)
-                # print(curr_button, button)
+                    curr_button = find_dealer(frame)
+                    # print(curr_button, button)
 
-            if hand_number in duration_list and len(duration_list[hand_number]) > 0:
-                datapoint = [losses, sum(duration_list[hand_number]) / len(duration_list[hand_number]), 0,
-                             (time.time() - begin) / 60, 0.64 / 1.5]
-                print(datapoint)
-                f_linear = np.dot(w_bar, datapoint) + b
-                # print(np.exp(-1 * f_linear))
-                f_wb = 1 / (1 + np.exp(-f_linear))
-                print(f_wb)
-            hand_number += 1
-            if frame_num > 3:
-                hands_list[hand_number] = list()
-                duration_list[hand_number] = list()
-            button = curr_button
-            # print(hands_list, hand_number)
+                if hand_number in duration_list and len(duration_list[hand_number]) > 0:
+                    datapoint = [losses, sum(duration_list[hand_number]) / len(duration_list[hand_number]), 0,
+                                (time.time() - begin) / 60, 0.64 / 1.5]
+                    # print(datapoint)
+                    f_linear = np.dot(w_bar, datapoint) + b
+                    # print(np.exp(-1 * f_linear))
+                    f_wb = 1 / (1 + np.exp(-f_linear))
+                    return f_wb
+                hand_number += 1
+                if frame_num > 3:
+                    hands_list[hand_number] = list()
+                    duration_list[hand_number] = list()
+                button = curr_button
+                # print(hands_list, hand_number)
 
-print(hands_list)
-print(duration_list)
-print(starting_stack_list)
-print(ending_stack_list)
+    # print(hands_list)
+    # print(duration_list)
+    # print(starting_stack_list)
+    # print(ending_stack_list)
 
