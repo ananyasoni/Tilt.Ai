@@ -80,7 +80,7 @@ button {
     border-radius: 50%; /* Circular buttons like poker chips */
     width: 50px; /* Adjusted width for buttons */
     height: 50px; /* Adjusted height for buttons */
-    font-size: 16px; /* Font size for button text */
+    font-size: 13px; /* Font size for button text */
     font-weight: bold;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Slight shadow to give a raised look */
     cursor: pointer;
@@ -94,4 +94,48 @@ button:active {
 
 button:hover {
     background-color: #b71c1c; /* Darker red on hover */
+}
+
+.poker-chip {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    background-color: red; /* Base color of the poker chip */
+    border: 4px solid white; /* White outer ring */
+    border-radius: 50%; /* Circular shape */
+    width: 120px; /* Diameter of the chip */
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Adds depth */
+    position: relative;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+}
+
+button::before {
+    top: 20px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    transform: rotate(90deg);
+}
+
+.button:after {
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    transform: rotate(90deg);
+}
+
+/* Add additional small stripes */
+.button::before,
+button::after {
+    height: 10px;
+    width: 24px; /* Small stripe width */
+    background-color: white;
 }
