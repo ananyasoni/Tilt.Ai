@@ -46,7 +46,7 @@ def login():
     cursor.execute("SELECT EXISTS(SELECT * FROM Users WHERE user = ? AND password = ?);", (login, password))
     conn.commit()
     if(cursor.fetchone()[0]):
-        return jsonify({'success' : True})
+        return jsonify({'success' : login})
     else:
         return jsonify({'success' : False})
 
@@ -61,4 +61,4 @@ def getBlock():
     return jsonify({'block' : cursor.fetchone()[0]})
 
 if __name__ == '__main__':
-    app.run(port=5000)
+    app.run(port=5500)
