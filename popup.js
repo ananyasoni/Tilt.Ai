@@ -2,6 +2,7 @@
 
 (function() {
     id('start').addEventListener('click', runPokerNowGrabber);
+    updateTiltDisplay(0);
     function updateTiltDisplay(tilt) {
         // Convert tilt (0 to 1) to percentage (0 to 100)
         const tiltPercentage = tilt * 100;
@@ -39,6 +40,7 @@
             });
             await statusCheck(res);
             res = await res.json();
+            console.log("result: " + res.percentage);
             updateTiltDisplay(res.percentage);
           } catch (err) {
             handleError(err);
@@ -54,12 +56,4 @@
     function id(id) {
         return document.getElementById(id);
     }
-    // const interval = setInterval(() => {
-    //     if (tilt <= 1) {
-    //         updateTiltDisplay(tilt);
-    //         tilt += 0.025; // Increase the tilt gradually (slower animation)
-    //     } else {
-    //         clearInterval(interval); // Stop when the tilt reaches 1
-    //     }
-    // }, 1000); // Change tilt value every 100ms
 })();
