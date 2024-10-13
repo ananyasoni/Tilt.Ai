@@ -1,13 +1,16 @@
 'use strict';
 
 (function() {
-  const blockerButton = id('blocker_btn');
-
-  blockerButton.addEventListener('click', updateBlock);
-  init();
+  let currBlock = getCheckBox();
+  window.addEventListener('load', init);
 
   function init() {
-      loadAccount();
+    if(currBlock) {
+      id('blocker_val').checked = true;
+    } else {
+      id('blocker_val').checked = false;
+    }
+    id('blocker_btn').addEventListener('click', updateBlock);
   }
 
    function handleError(err) {
@@ -35,7 +38,7 @@
         body: JSON.stringify(params)
       });
       await statusCheck(res);
-      init();
+      currBlock = bool;
     } catch (err) {
       handleError(err);
     }
@@ -59,8 +62,8 @@
       }
    }
 
-   function loadAccount(res) {
-    id('blocker_val').checked = getCheckBox();
+   async function loadAccount(res) {
+    id('blocker_val').checked = await getCheckBox();
    }
 
 
