@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang='en' dir='ltr'>
+  <head>
+    <meta charset='utf-8'>
+    <title>Login/Sign Up</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;700&display=swap" rel="stylesheet">
+    <link rel='stylesheet' href='login.css'>
+    <script src='login.js' defer></script>
+  </head>
+  <body>
+    <p id='error' class="hidden">
+      An error occurred- please try again!
+    </p>
+    <header>
+      <h1>Log In / Sign Up</h1>
+    </header>
+
+    <!-- Login Form -->
+    <form id="login_form">
+      <label for="login_username">Username <input id='login_username' name="username" type='text' required></label>
+      <label for="login_password">Password <input id='login_password' name="password" type='password' required></label>
+      <button id='login-btn' type="submit">Sign In</button>
+      <p>Don't have an account? <button type="button" id="show-signup-btn">Sign Up</button></p>
+    </form>
+
+    <!-- Sign-Up Form (Initially Hidden) -->
+    <form id="signup_form" class="hidden">
+      <label for="signup_username">Create Username <input id='signup_username' name="username" type='text' required></label>
+      <label for="signup_password">Create Password <input id='signup_password' name="password" type='password' required></label>
+      <button id='signup-btn' type="submit">Sign Up</button>
+      <p>Already have an account? <button type="button" id="show-login-btn">Log In</button></p>
+    </form>
+  </body>
+</html>
