@@ -33,9 +33,6 @@
       let params = Object.fromEntries(formData.entries());
       let res = await fetch('http://127.0.0.1:5000/login', {  // Replace with actual backend URL
         method: "POST",
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify(params)
       });
       await statusCheck(res);
@@ -49,13 +46,10 @@
   // Fetch request to sign up
   async function signupRequest() {
     try {
-      let formData = new FormData(id("login_form"));
+      let formData = new FormData(id("signup_form"));
       let params = Object.fromEntries(formData.entries());
       let res = await fetch('http://127.0.0.1:5000/signup', {  // Replace with actual backend URL
         method: "POST",
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify(params)
       });
       await statusCheck(res);

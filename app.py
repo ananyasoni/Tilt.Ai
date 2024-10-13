@@ -33,7 +33,7 @@ def addAccount():
     try:
         cursor.execute("INSERT INTO Users (username, password, block) VALUES (?, ?, ?)", (login, password, 0))
     except sqlite3.IntegrityError as e:
-        return jsonify({'success' : login})
+        return jsonify({'success' : False})
     return jsonify({'success' : True})
 
 @app.route('/changeblock', methods=['POST'])
