@@ -1,5 +1,7 @@
 'use strict';
+
 (function() {
+
   window.addEventListener('load', init);
 
   /**
@@ -31,8 +33,8 @@
     id('error').classList.remove("hidden");
     console.log(err);
    }
+
   /**
-   * TODO
    * signIn - Signs the user in based on username and password inputs
    */
   function signIn() {
