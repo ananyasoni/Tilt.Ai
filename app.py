@@ -30,7 +30,7 @@ def addAccount():
     try:
         cursor.execute("INSERT INTO Users (username, password, block) VALUES (?, ?, ?)", (login, password, 0))
     except sqlite3.IntegrityError as e:
-        return jsonify({'success' : False})
+        return jsonify({'success' : login})
     return jsonify({'success' : True})
 
 @app.route('/changeblock', methods=['POST'])
@@ -47,7 +47,6 @@ def login():
     data = request.get_json()
     login = data.username
     password = data.password
-    
     conn = connect_db('User_Info.db')
     cursor = conn.cursor()
     cursor.execute("SELECT EXISTS(SELECT * FROM Users WHERE username = ? AND password = ?)", (login, password))
@@ -55,7 +54,7 @@ def login():
         return jsonify({'success' : True})
     else:
         return jsonify({'success' : False})
-    
+
 @app.route('/getblock', methods=['GET'])
 def getBlock():
     data = request.get_json()

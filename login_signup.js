@@ -47,7 +47,7 @@
   }
 
   // Fetch request to sign up
-   async function signupRequest() {
+  async function signupRequest() {
     try {
       let formData = new FormData(id("login_form"));
       let params = Object.fromEntries(formData.entries());
@@ -60,9 +60,11 @@
       });
       await statusCheck(res);
       res = await res.json();
+      // Store the username in local storage
+      localStorage.setItem('username', res.username);
       login(res);
     } catch (err) {
-      handleError(err);
+        handleError(err);
     }
   }
 
@@ -74,7 +76,6 @@
    function signIn(res) {
     location.assign("account.html");
    }
-   
    function login(res) {
     document.getElementById('signup_form').classList.add('hidden');
     document.getElementById('login_form').classList.remove('hidden');
