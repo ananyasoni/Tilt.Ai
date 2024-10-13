@@ -1,10 +1,12 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import numpy as np
 import sqlite3
 import json
 import pickle
 
 app = Flask(__name__)
+CORS(app)  # Apply CORS to the app
 
 # # Load your pre-trained machine learning model
 # with open('ml_model.pkl', 'rb') as f:
@@ -25,6 +27,7 @@ def addAccount():
     data = request.get_json()
     login = data['username']  # Corrected how data is accessed
     password = data['password']
+    print(login, password)
     conn = connect_db('User_Info.db')
     cursor = conn.cursor()
     try:
@@ -40,7 +43,7 @@ def changeBlock():
     block = data.block
     conn = connect_db('User_Info.db')
     cursor = conn.cursor()
-    cursor.execute("UPDATE Users SET block = ? WHERE username = ?" (block, login))
+    cursor.execute("UPDATE Users SET block = ? WHERE username = ?", (block, login))
 
 @app.route('/login', methods=['POST'])
 def login():
