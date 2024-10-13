@@ -2,10 +2,10 @@
 
 (function() {
 
-  window.addEventListener('load', init);
+  window.addEventListener('blocker_btn', init);
 
   function init() {
-
+      loadAccount();
   }
 
    function handleError(err) {
@@ -31,15 +31,10 @@
       }
    }
 
-   function signIn(res) {
-    location.assign("account.html");
-    document.getElementById('blocker_val').checked = getCheckBox();
+   function loadAccount(res) {
+    id('blocker_val').checked = getCheckBox();
    }
 
-   function login(res) {
-    document.getElementById('signup_form').classList.add('hidden');
-    document.getElementById('login_form').classList.remove('hidden');
-   }
 
   async function statusCheck(res) {
     if (!res.ok) {
