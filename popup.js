@@ -30,11 +30,11 @@
         for (let i = 0; i < 15; i++) {
           try {
             const queryParams = new URLSearchParams(params).toString();
-            const url = `http://127.0.0.1:5000/getpercentage?${queryParams}`;
-            let res = await fetch(url, { 
-              method: "GET",
+            const url = "http://127.0.0.1:5000/getpercentage";
+            let res = await fetch(url, {
+              method: "POST",
               headers: {
-                'Content-Type': 'application/json' 
+                'Content-Type': 'application/json'
               }
             });
             await statusCheck(res);
