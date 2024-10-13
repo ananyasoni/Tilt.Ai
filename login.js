@@ -4,9 +4,6 @@
 
   window.addEventListener('load', init);
 
-  /**
-   * TODO - setup the sign-in button on initial page load
-   */
   function init() {
     id("login_form").addEventListener("submit", async (evt) => {
       evt.preventDefault();
@@ -16,10 +13,14 @@
 
   async function makeRequest() {
     try {
-      let params =  new FormData(id("login_form"));
-      let res = await fetch('http://127.0.0.1:5500/login.html', {
+      let formData = new FormData(id("login_form"));
+      let params = Object.fromEntries(formData.entries());
+      let res = await fetch('http://127.0.0.1:5500/login.html', {  // Replace with actual backend URL
         method: "POST",
-        body: params
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(params)
       });
       await statusCheck(res);
       res = await res.json();
@@ -34,12 +35,9 @@
     console.log(err);
    }
 
-  /**
-   * signIn - Signs the user in based on username and password inputs
-   */
-  function signIn() {
+   function signIn() {
     location.assign("account.html");
-  }
+   }
 
   async function statusCheck(res) {
     if (!res.ok) {
@@ -52,7 +50,4 @@
     return document.getElementById(id);
   }
 
-  function qs(selector) {
-    return document.querySelector(selector);
-  }
 })();
