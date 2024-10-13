@@ -40,6 +40,8 @@
       });
       await statusCheck(res);
       res = await res.json();
+      // Store the username in local storage
+      localStorage.setItem('username', res.username);
       signIn(res);
     } catch (err) {
       handleError(err);
