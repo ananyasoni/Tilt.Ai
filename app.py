@@ -25,6 +25,7 @@ def addAccount():
     data = request.get_json()
     login = data.username
     password = data.password
+    print(login, password)
     conn = connect_db('User_Info.db')
     cursor = conn.cursor()
     cursor.execute("INSERT users (name, email) VALUES ('John Doe', 'john@example.com')")
